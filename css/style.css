@@ -131,13 +131,12 @@ nav a:hover {
 /* ==================== ABOUT SECTION ==================== */
 
 .about-content {
-    max-width: 800px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.section-label {
-    font-size: 0.9rem;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
+.about-text {
+    text-align: center;
 }
 
 .about-text h2 {
@@ -146,11 +145,31 @@ nav a:hover {
 }
 
 .about-text p {
-    font-size: 1.05rem;
+    max-width: 750px;
+    margin: 0 auto 20px;
     line-height: 1.8;
-    margin-bottom: 20px;
 }
-/* ==================== SKILLS SECTION ==================== */
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 45px;
+}
+
+.about-item {
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.about-item h3 {
+    margin-bottom: 10px;
+}
+
+.about-item p {
+    margin: 0;
+    font-size: 0.95rem;
+}/* ==================== SKILLS SECTION ==================== */
 
 #skills h2 {
     font-size: 2.5rem;
