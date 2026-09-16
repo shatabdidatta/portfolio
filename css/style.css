@@ -339,3 +339,13 @@ nav a:hover {
     }
 
 }
+/* ==================== PROJECT STATUS ==================== */
+
+.project-status {
+    display: inline-block;
+    margin-bottom: 15px;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
