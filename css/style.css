@@ -169,42 +169,49 @@ nav a:hover {
 .about-item p {
     margin: 0;
     font-size: 0.95rem;
-}/* ==================== SKILLS SECTION ==================== */
+}
+/* ==================== SKILLS SECTION ==================== */
 
-#skills h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+.section-description {
+    max-width: 650px;
+    margin: 0 auto 40px;
+    text-align: center;
+    line-height: 1.7;
 }
 
 .skills-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 20px;
-
     max-width: 1000px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
 }
 
 .skill-card {
-    padding: 30px;
+    padding: 30px 25px;
+    border-radius: 14px;
+    text-align: center;
 
-    border: 1px solid #334155;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-    border-radius: 10px;
-
-    background-color: #1e293b;
+.skill-card:hover {
+    transform: translateY(-6px);
 }
 
 .skill-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 1.25rem;
 }
 
 .skill-card p {
+    margin: 0;
     line-height: 1.6;
-}
-/* ==================== PROJECTS SECTION ==================== */
+    font-size: 0.95rem;
+}/* ==================== PROJECTS SECTION ==================== */
 
 #projects h2 {
     font-size: 2.5rem;
