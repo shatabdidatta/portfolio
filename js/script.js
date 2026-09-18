@@ -1,37 +1,43 @@
-/* =========================================================
-   SHATABDI DATTA SRISTY - PORTFOLIO
-   Main JavaScript
-   ========================================================= */
+/* =====================================================
+   PAGE LOADER
+===================================================== */
+
+window.addEventListener("load", () => {
+
+    const loader =
+        document.querySelector(".page-loader");
+
+    setTimeout(() => {
+
+        loader.classList.add("hidden");
+
+    }, 500);
+
+});
 
 
-/* ==================== MOBILE NAVIGATION ==================== */
 
-const menuToggle = document.querySelector(".menu-toggle");
+/* =====================================================
+   MOBILE NAVIGATION
+===================================================== */
 
-const navLinks = document.querySelector(".nav-links");
+const menuToggle =
+    document.getElementById("menuToggle");
 
-const navItems = document.querySelectorAll(".nav-link");
+const navLinks =
+    document.getElementById("navLinks");
 
 
 menuToggle.addEventListener("click", () => {
-
-    menuToggle.classList.toggle("open");
 
     navLinks.classList.toggle("open");
 
 });
 
 
-/*
-   Close mobile navigation after
-   clicking a navigation link.
-*/
-
-navItems.forEach((link) => {
+document.querySelectorAll(".nav-link").forEach(link => {
 
     link.addEventListener("click", () => {
-
-        menuToggle.classList.remove("open");
 
         navLinks.classList.remove("open");
 
@@ -41,93 +47,69 @@ navItems.forEach((link) => {
 
 
 
-/* ==================== NAVBAR SCROLL EFFECT ==================== */
+/* =====================================================
+   DARK / LIGHT MODE
+===================================================== */
 
-const navbar = document.querySelector(".navbar");
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const themeIcon =
+    document.querySelector(".theme-icon");
 
 
-window.addEventListener("scroll", () => {
+const savedTheme =
+    localStorage.getItem("portfolio-theme");
 
-    if (window.scrollY > 40) {
 
-        navbar.classList.add("scrolled");
+if (savedTheme === "dark") {
 
-    } else {
+    document.body.classList.add("dark");
 
-        navbar.classList.remove("scrolled");
+    themeIcon.textContent = "☀";
 
-    }
+}
+
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+
+    const isDark =
+        document.body.classList.contains("dark");
+
+
+    localStorage.setItem(
+        "portfolio-theme",
+        isDark ? "dark" : "light"
+    );
+
+
+    themeIcon.textContent =
+        isDark ? "☀" : "☾";
 
 });
 
 
 
-/* ==================== ACTIVE NAVIGATION ==================== */
+/* =====================================================
+   TYPING ANIMATION
+===================================================== */
 
-const sections = document.querySelectorAll("section");
-
-
-const updateActiveNavigation = () => {
-
-    let currentSection = "home";
-
-
-    sections.forEach((section) => {
-
-        const sectionTop = section.offsetTop - 150;
-
-        const sectionHeight = section.offsetHeight;
-
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-        ) {
-
-            currentSection = section.getAttribute("id");
-
-        }
-
-    });
-
-
-    navItems.forEach((link) => {
-
-        link.classList.remove("active");
-
-        if (
-            link.getAttribute("href") === `#${currentSection}`
-        ) {
-
-            link.classList.add("active");
-
-        }
-
-    });
-
-};
-
-
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation
-);
-
-
-
-/* ==================== TYPING ANIMATION ==================== */
-
-const typingText = document.getElementById("typing-text");
+const typingText =
+    document.getElementById("typingText");
 
 
 const words = [
 
-    "digital experiences.",
+    "software development.",
 
-    "practical projects.",
+    "artificial intelligence.",
 
-    "creative solutions.",
+    "problem solving.",
 
-    "software ideas."
+    "building practical projects."
 
 ];
 
@@ -141,7 +123,8 @@ let deleting = false;
 
 function typeEffect() {
 
-    const currentWord = words[wordIndex];
+    const currentWord =
+        words[wordIndex];
 
 
     if (!deleting) {
@@ -156,15 +139,18 @@ function typeEffect() {
 
 
         if (
-            characterIndex === currentWord.length
+            characterIndex ===
+            currentWord.length
         ) {
 
             deleting = true;
 
-            setTimeout(typeEffect, 1600);
+            setTimeout(
+                typeEffect,
+                1600
+            );
 
             return;
-
         }
 
     } else {
@@ -183,16 +169,18 @@ function typeEffect() {
             deleting = false;
 
             wordIndex =
-                (wordIndex + 1) % words.length;
+                (wordIndex + 1)
+                % words.length;
 
         }
 
     }
 
 
-    const speed = deleting ? 45 : 80;
-
-    setTimeout(typeEffect, speed);
+    setTimeout(
+        typeEffect,
+        deleting ? 45 : 75
+    );
 
 }
 
@@ -201,7 +189,9 @@ typeEffect();
 
 
 
-/* ==================== SCROLL REVEAL ==================== */
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
 
 const revealElements =
     document.querySelectorAll(".reveal");
@@ -209,10 +199,9 @@ const revealElements =
 
 const revealObserver =
     new IntersectionObserver(
+        entries => {
 
-        (entries) => {
-
-            entries.forEach((entry) => {
+            entries.forEach(entry => {
 
                 if (entry.isIntersecting) {
 
@@ -237,7 +226,7 @@ const revealObserver =
     );
 
 
-revealElements.forEach((element) => {
+revealElements.forEach(element => {
 
     revealObserver.observe(element);
 
@@ -245,128 +234,186 @@ revealElements.forEach((element) => {
 
 
 
-/* ==================== CONTACT FORM ==================== */
+/* =====================================================
+   ACTIVE NAVIGATION
+===================================================== */
 
-const contactForm =
-    document.getElementById("contactForm");
+const sections =
+    document.querySelectorAll("section");
 
-const formMessage =
-    document.getElementById("formMessage");
-
-
-contactForm.addEventListener("submit", (event) => {
-
-    event.preventDefault();
+const navItems =
+    document.querySelectorAll(".nav-link");
 
 
-    const name =
-        document.getElementById("name").value.trim();
+const sectionObserver =
+    new IntersectionObserver(
+        entries => {
 
-    const email =
-        document.getElementById("email").value.trim();
+            entries.forEach(entry => {
 
-    const message =
-        document.getElementById("message").value.trim();
+                if (entry.isIntersecting) {
 
-
-    /*
-       This portfolio is currently a static website.
-
-       Instead of pretending to send the form to
-       a backend server, we create a mailto link
-       that opens the user's email application.
-    */
-
-    if (!name || !email || !message) {
-
-        formMessage.textContent =
-            "Please complete all fields.";
-
-        return;
-
-    }
+                    const currentId =
+                        entry.target.getAttribute(
+                            "id"
+                        );
 
 
-    const subject =
-        encodeURIComponent(
-            `Portfolio Contact from ${name}`
-        );
+                    navItems.forEach(link => {
+
+                        link.classList.remove(
+                            "active"
+                        );
 
 
-    const body =
-        encodeURIComponent(
+                        if (
+                            link.getAttribute(
+                                "href"
+                            ) ===
+                            `#${currentId}`
+                        ) {
 
-            `Name: ${name}\n\n` +
+                            link.classList.add(
+                                "active"
+                            );
 
-            `Email: ${email}\n\n` +
+                        }
 
-            `Message:\n${message}`
+                    });
 
-        );
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.35
+        }
+
+    );
 
 
-    const mailtoLink =
-        `mailto:shatabdisds007@gmail.com` +
-        `?subject=${subject}` +
-        `&body=${body}`;
+sections.forEach(section => {
 
-
-    window.location.href = mailtoLink;
-
-
-    formMessage.textContent =
-        "Opening your email application...";
+    sectionObserver.observe(section);
 
 });
 
 
 
-/* ==================== MOUSE GLOW EFFECT ==================== */
+/* =====================================================
+   PROJECT HORIZONTAL DRAG
+===================================================== */
 
-/*
-   A subtle mouse-following effect is added
-   to interactive cards.
-*/
-
-const cards =
-    document.querySelectorAll(
-        ".skill-card, .info-card"
+const projectWrapper =
+    document.querySelector(
+        ".projects-wrapper"
     );
 
 
-cards.forEach((card) => {
+let isDown = false;
 
-    card.addEventListener("mousemove", (event) => {
+let startX;
 
-        const rect =
-            card.getBoundingClientRect();
+let scrollLeft;
+
+
+projectWrapper.addEventListener(
+    "mousedown",
+    event => {
+
+        isDown = true;
+
+        projectWrapper.style.cursor =
+            "grabbing";
+
+        startX =
+            event.pageX -
+            projectWrapper.offsetLeft;
+
+        scrollLeft =
+            projectWrapper.scrollLeft;
+
+    }
+);
+
+
+projectWrapper.addEventListener(
+    "mouseleave",
+    () => {
+
+        isDown = false;
+
+        projectWrapper.style.cursor =
+            "grab";
+
+    }
+);
+
+
+projectWrapper.addEventListener(
+    "mouseup",
+    () => {
+
+        isDown = false;
+
+        projectWrapper.style.cursor =
+            "grab";
+
+    }
+);
+
+
+projectWrapper.addEventListener(
+    "mousemove",
+    event => {
+
+        if (!isDown) return;
+
+        event.preventDefault();
 
 
         const x =
-            event.clientX - rect.left;
+            event.pageX -
+            projectWrapper.offsetLeft;
 
 
-        const y =
-            event.clientY - rect.top;
+        const walk =
+            (x - startX) * 1.5;
 
 
-        card.style.setProperty(
-            "--mouse-x",
-            `${x}px`
-        );
+        projectWrapper.scrollLeft =
+            scrollLeft - walk;
+
+    }
+);
 
 
-        card.style.setProperty(
-            "--mouse-y",
-            `${y}px`
-        );
+/* =====================================================
+   PROJECT LINK PROTECTION
+===================================================== */
+
+const projectLinks =
+    document.querySelectorAll(
+        ".project-link"
+    );
+
+
+projectLinks.forEach(link => {
+
+    link.addEventListener("click", event => {
+
+        if (link.getAttribute("href") === "#") {
+
+            event.preventDefault();
+
+            alert(
+                "Add the GitHub repository link here after the project is uploaded."
+            );
+
+        }
 
     });
 
 });
-
-
-
-/* ==================== INITIAL PAGE SETUP ==================== */
-
-updateActiveNavigation();
