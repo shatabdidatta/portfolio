@@ -1,65 +1,19 @@
-/* =====================================================
-   PAGE LOADER
-===================================================== */
-
-window.addEventListener("load", () => {
-
-    const loader =
-        document.querySelector(".page-loader");
-
-    setTimeout(() => {
-
-        loader.classList.add("hidden");
-
-    }, 500);
-
-});
-
-
-
-/* =====================================================
-   MOBILE NAVIGATION
-===================================================== */
-
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const navLinks =
-    document.getElementById("navLinks");
-
-
-menuToggle.addEventListener("click", () => {
-
-    navLinks.classList.toggle("open");
-
-});
-
-
-document.querySelectorAll(".nav-link").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        navLinks.classList.remove("open");
-
-    });
-
-});
-
-
-
-/* =====================================================
-   DARK / LIGHT MODE
-===================================================== */
+/* ==================== THEME TOGGLE ==================== */
 
 const themeToggle =
-    document.getElementById("themeToggle");
+    document.getElementById("theme-toggle");
 
 const themeIcon =
-    document.querySelector(".theme-icon");
+    document.getElementById("theme-icon");
 
+
+/*
+    Check whether the user previously selected
+    dark mode.
+*/
 
 const savedTheme =
-    localStorage.getItem("portfolio-theme");
+    localStorage.getItem("theme");
 
 
 if (savedTheme === "dark") {
@@ -71,7 +25,9 @@ if (savedTheme === "dark") {
 }
 
 
-themeToggle.addEventListener("click", () => {
+/* Toggle theme */
+
+themeToggle.addEventListener("click", function () {
 
     document.body.classList.toggle("dark");
 
@@ -80,337 +36,77 @@ themeToggle.addEventListener("click", () => {
         document.body.classList.contains("dark");
 
 
-    localStorage.setItem(
-        "portfolio-theme",
-        isDark ? "dark" : "light"
-    );
+    if (isDark) {
 
+        themeIcon.textContent = "☀";
 
-    themeIcon.textContent =
-        isDark ? "☀" : "☾";
-
-});
-
-
-
-/* =====================================================
-   TYPING ANIMATION
-===================================================== */
-
-const typingText =
-    document.getElementById("typingText");
-
-
-const words = [
-
-    "software development.",
-
-    "artificial intelligence.",
-
-    "problem solving.",
-
-    "building practical projects."
-
-];
-
-
-let wordIndex = 0;
-
-let characterIndex = 0;
-
-let deleting = false;
-
-
-function typeEffect() {
-
-    const currentWord =
-        words[wordIndex];
-
-
-    if (!deleting) {
-
-        typingText.textContent =
-            currentWord.substring(
-                0,
-                characterIndex + 1
-            );
-
-        characterIndex++;
-
-
-        if (
-            characterIndex ===
-            currentWord.length
-        ) {
-
-            deleting = true;
-
-            setTimeout(
-                typeEffect,
-                1600
-            );
-
-            return;
-        }
+        localStorage.setItem(
+            "theme",
+            "dark"
+        );
 
     } else {
 
-        typingText.textContent =
-            currentWord.substring(
-                0,
-                characterIndex - 1
-            );
+        themeIcon.textContent = "☾";
 
-        characterIndex--;
-
-
-        if (characterIndex === 0) {
-
-            deleting = false;
-
-            wordIndex =
-                (wordIndex + 1)
-                % words.length;
-
-        }
+        localStorage.setItem(
+            "theme",
+            "light"
+        );
 
     }
-
-
-    setTimeout(
-        typeEffect,
-        deleting ? 45 : 75
-    );
-
-}
-
-
-typeEffect();
-
-
-
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                    revealObserver.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: 0.12
-        }
-
-    );
-
-
-revealElements.forEach(element => {
-
-    revealObserver.observe(element);
 
 });
 
 
-
-/* =====================================================
-   ACTIVE NAVIGATION
-===================================================== */
+/* ==================== ACTIVE NAVIGATION ==================== */
 
 const sections =
     document.querySelectorAll("section");
 
-const navItems =
+const navLinks =
     document.querySelectorAll(".nav-link");
 
 
-const sectionObserver =
-    new IntersectionObserver(
-        entries => {
+window.addEventListener("scroll", function () {
 
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    const currentId =
-                        entry.target.getAttribute(
-                            "id"
-                        );
+    let currentSection = "";
 
 
-                    navItems.forEach(link => {
+    sections.forEach(function (section) {
 
-                        link.classList.remove(
-                            "active"
-                        );
+        const sectionTop =
+            section.offsetTop - 150;
+
+        const sectionHeight =
+            section.offsetHeight;
 
 
-                        if (
-                            link.getAttribute(
-                                "href"
-                            ) ===
-                            `#${currentId}`
-                        ) {
+        if (
+            window.scrollY >= sectionTop &&
+            window.scrollY <
+                sectionTop + sectionHeight
+        ) {
 
-                            link.classList.add(
-                                "active"
-                            );
+            currentSection =
+                section.getAttribute("id");
 
-                        }
-
-                    });
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: 0.35
         }
 
-    );
+    });
 
 
-sections.forEach(section => {
+    navLinks.forEach(function (link) {
 
-    sectionObserver.observe(section);
-
-});
+        link.classList.remove("active");
 
 
+        if (
+            link.getAttribute("href") ===
+            "#" + currentSection
+        ) {
 
-/* =====================================================
-   PROJECT HORIZONTAL DRAG
-===================================================== */
-
-const projectWrapper =
-    document.querySelector(
-        ".projects-wrapper"
-    );
-
-
-let isDown = false;
-
-let startX;
-
-let scrollLeft;
-
-
-projectWrapper.addEventListener(
-    "mousedown",
-    event => {
-
-        isDown = true;
-
-        projectWrapper.style.cursor =
-            "grabbing";
-
-        startX =
-            event.pageX -
-            projectWrapper.offsetLeft;
-
-        scrollLeft =
-            projectWrapper.scrollLeft;
-
-    }
-);
-
-
-projectWrapper.addEventListener(
-    "mouseleave",
-    () => {
-
-        isDown = false;
-
-        projectWrapper.style.cursor =
-            "grab";
-
-    }
-);
-
-
-projectWrapper.addEventListener(
-    "mouseup",
-    () => {
-
-        isDown = false;
-
-        projectWrapper.style.cursor =
-            "grab";
-
-    }
-);
-
-
-projectWrapper.addEventListener(
-    "mousemove",
-    event => {
-
-        if (!isDown) return;
-
-        event.preventDefault();
-
-
-        const x =
-            event.pageX -
-            projectWrapper.offsetLeft;
-
-
-        const walk =
-            (x - startX) * 1.5;
-
-
-        projectWrapper.scrollLeft =
-            scrollLeft - walk;
-
-    }
-);
-
-
-/* =====================================================
-   PROJECT LINK PROTECTION
-===================================================== */
-
-const projectLinks =
-    document.querySelectorAll(
-        ".project-link"
-    );
-
-
-projectLinks.forEach(link => {
-
-    link.addEventListener("click", event => {
-
-        if (link.getAttribute("href") === "#") {
-
-            event.preventDefault();
-
-            alert(
-                "Add the GitHub repository link here after the project is uploaded."
-            );
+            link.classList.add("active");
 
         }
 
