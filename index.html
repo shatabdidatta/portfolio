@@ -4,36 +4,22 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="description"
-        content="Portfolio of Shatabdi Datta Sristy, a Computer Science student interested in software development, artificial intelligence, and practical projects."
-    >
+    <meta name="description"
+          content="Portfolio of Shatabdi Datta Sristy, a Computer Science student interested in software development, artificial intelligence, and practical projects.">
 
     <title>Shatabdi Datta Sristy | Portfolio</title>
 
     <!-- Google Font -->
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Main stylesheet -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -42,18 +28,18 @@
 
     <!-- ==================== NAVBAR ==================== -->
 
-    <header class="navbar">
+    <header class="site-header">
 
-        <div class="nav-container">
+        <nav class="navbar">
 
-            <!-- Logo -->
+            <!-- Personal Logo -->
             <a href="#home" class="logo">
                 SDS<span>.</span>
             </a>
 
 
-            <!-- Navigation links -->
-            <nav class="nav-links">
+            <!-- Desktop Navigation -->
+            <div class="nav-links" id="navLinks">
 
                 <a href="#home" class="nav-link active">
                     Home
@@ -75,19 +61,37 @@
                     Contact
                 </a>
 
-            </nav>
+            </div>
 
 
-            <!-- Theme button -->
-            <button
-                id="theme-toggle"
-                class="theme-toggle"
-                aria-label="Toggle dark mode"
-            >
-                <span id="theme-icon">☾</span>
-            </button>
+            <!-- Right Side Controls -->
+            <div class="nav-actions">
 
-        </div>
+                <!-- Theme Button -->
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle dark mode"
+                    title="Toggle theme">
+
+                    <span id="themeIcon">☾</span>
+
+                </button>
+
+
+                <!-- Mobile Menu -->
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Open navigation menu">
+
+                    ☰
+
+                </button>
+
+            </div>
+
+        </nav>
 
     </header>
 
@@ -105,13 +109,9 @@
             <div class="hero-container">
 
 
-                <!-- Left side -->
-                <div class="hero-content">
+                <!-- Hero Text -->
 
-                    <p class="hero-label">
-                        COMPUTER SCIENCE STUDENT
-                    </p>
-
+                <div class="hero-content reveal">
 
                     <p class="hero-intro">
                         Hello, I'm
@@ -125,95 +125,88 @@
 
 
                     <h2>
-                        I build, learn, and solve problems through technology.
+                        Computer Science Student
                     </h2>
 
 
                     <p class="hero-description">
-                        I am a Computer Science student interested in
-                        software development, artificial intelligence,
-                        problem solving, and building practical projects.
+                        I am interested in software development,
+                        artificial intelligence, problem solving,
+                        and building practical projects.
                     </p>
 
 
-                    <!-- Hero buttons -->
-                    <div class="hero-actions">
+                    <div class="hero-buttons">
 
-                        <a
-                            href="#projects"
-                            class="primary-button"
-                        >
-                            Explore My Work
-                            <span>→</span>
+                        <a href="#projects" class="button button-primary">
+                            View My Work
                         </a>
 
-
-                        <a
-                            href="#contact"
-                            class="secondary-button"
-                        >
-                            Let's Connect
+                        <a href="#contact" class="button button-secondary">
+                            Contact Me
                         </a>
 
                     </div>
 
 
-                    <!-- Small professional information -->
                     <div class="hero-meta">
 
-                        <div>
-                            <span class="meta-label">
-                                Focus
-                            </span>
+                        <span>
+                            Computer Science
+                        </span>
 
-                            <span class="meta-value">
-                                Software & AI
-                            </span>
-                        </div>
-
-
-                        <div>
-                            <span class="meta-label">
-                                Based
-                            </span>
-
-                            <span class="meta-value">
-                                India
-                            </span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- Right side: Professional photo -->
-                <div class="hero-photo-wrapper">
-
-                    <div class="photo-frame">
-
-                        <img
-                            src="images/profile.jpg"
-                            alt="Shatabdi Datta Sristy"
-                            class="profile-photo"
-                        >
-
-                    </div>
-
-                    <div class="photo-caption">
-
-                        <span class="status-dot"></span>
+                        <span class="dot"></span>
 
                         <span>
-                            Computer Science Student
+                            Software & AI
                         </span>
 
                     </div>
 
                 </div>
 
+
+
+                <!-- Professional Photo -->
+
+                <div class="hero-photo reveal">
+
+                    <div class="photo-frame">
+
+                        <!--
+                            Add your own professional photo here.
+
+                            File location:
+                            images/profile.jpg
+                        -->
+
+                        <img
+                            src="images/profile.jpg"
+                            alt="Professional portrait of Shatabdi Datta Sristy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('photo-placeholder');">
+
+                        <div class="photo-placeholder-content">
+
+                            <span>SD</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
+
+            <!-- Scroll Indicator -->
+
+            <a href="#about" class="scroll-indicator">
+
+                <span></span>
+
+                Scroll to explore
+
+            </a>
 
         </section>
 
@@ -225,68 +218,83 @@
 
             <div class="section-container">
 
-                <div class="section-heading">
+                <div class="section-heading reveal">
 
                     <p class="section-label">
-                        ABOUT
+                        ABOUT ME
                     </p>
 
                     <h2>
-                        A curious mind,
-                        <span>focused on building.</span>
+                        Learning by building.
                     </h2>
 
                 </div>
 
 
-                <div class="about-grid">
+                <div class="about-layout">
 
-                    <div class="about-main">
+
+                    <div class="about-text reveal">
 
                         <p>
-                            I am a Computer Science student with an interest
-                            in software development, artificial intelligence,
-                            and practical technology projects.
+                            I am a Computer Science student with an
+                            interest in software development,
+                            artificial intelligence, and problem solving.
                         </p>
 
                         <p>
-                            I enjoy understanding how things work, learning
-                            new technologies, solving programming problems,
-                            and turning ideas into working software.
+                            I enjoy learning technologies by actually
+                            building things with them. My approach is
+                            focused on understanding the fundamentals,
+                            writing structured code, and improving
+                            through practical projects.
                         </p>
 
                     </div>
 
 
-                    <div class="about-details">
+                    <div class="about-details reveal">
 
-                        <div class="detail-item">
+                        <div class="detail-row">
 
                             <span>
-                                Education
+                                Field
                             </span>
 
                             <strong>
-                                BTech in Computer Science
+                                Computer Science
                             </strong>
 
                         </div>
 
 
-                        <div class="detail-item">
+                        <div class="detail-row">
 
                             <span>
                                 Interests
                             </span>
 
                             <strong>
-                                AI · Software · Problem Solving
+                                Software Development
                             </strong>
 
                         </div>
 
 
-                        <div class="detail-item">
+                        <div class="detail-row">
+
+                            <span>
+                                Exploring
+                            </span>
+
+                            <strong>
+                                Artificial Intelligence
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
 
                             <span>
                                 Approach
@@ -314,7 +322,7 @@
 
             <div class="section-container">
 
-                <div class="section-heading">
+                <div class="section-heading reveal">
 
                     <p class="section-label">
                         SKILLS
@@ -327,59 +335,47 @@
                 </div>
 
 
-                <div class="skills-grid">
+                <div class="skills-list reveal">
 
-                    <div class="skill-card">
-                        <span class="skill-number">01</span>
-                        <h3>C++</h3>
-                        <p>
-                            Programming and problem solving
-                        </p>
+                    <div class="skill-item">
+                        <span>01</span>
+                        <strong>C++</strong>
+                        <p>Programming & Problem Solving</p>
                     </div>
 
 
-                    <div class="skill-card">
-                        <span class="skill-number">02</span>
-                        <h3>Python</h3>
-                        <p>
-                            Programming and automation
-                        </p>
+                    <div class="skill-item">
+                        <span>02</span>
+                        <strong>Python</strong>
+                        <p>Programming & Automation</p>
                     </div>
 
 
-                    <div class="skill-card">
-                        <span class="skill-number">03</span>
-                        <h3>HTML</h3>
-                        <p>
-                            Semantic web structure
-                        </p>
+                    <div class="skill-item">
+                        <span>03</span>
+                        <strong>HTML</strong>
+                        <p>Web Structure</p>
                     </div>
 
 
-                    <div class="skill-card">
-                        <span class="skill-number">04</span>
-                        <h3>CSS</h3>
-                        <p>
-                            Responsive interfaces
-                        </p>
+                    <div class="skill-item">
+                        <span>04</span>
+                        <strong>CSS</strong>
+                        <p>Web Design & Layout</p>
                     </div>
 
 
-                    <div class="skill-card">
-                        <span class="skill-number">05</span>
-                        <h3>JavaScript</h3>
-                        <p>
-                            Web interaction and logic
-                        </p>
+                    <div class="skill-item">
+                        <span>05</span>
+                        <strong>JavaScript</strong>
+                        <p>Web Interactivity</p>
                     </div>
 
 
-                    <div class="skill-card">
-                        <span class="skill-number">06</span>
-                        <h3>Git & GitHub</h3>
-                        <p>
-                            Version control and collaboration
-                        </p>
+                    <div class="skill-item">
+                        <span>06</span>
+                        <strong>Git & GitHub</strong>
+                        <p>Version Control</p>
                     </div>
 
                 </div>
@@ -390,96 +386,190 @@
 
 
 
-       <!-- ==================== PROJECTS ==================== -->
+        <!-- ==================== PROJECTS ==================== -->
 
-<section id="projects" class="section">
+        <section id="projects" class="section">
 
-    <p class="section-label">MY WORK</p>
+            <div class="section-container">
 
-    <h2>Featured Project</h2>
+                <div class="section-heading project-heading reveal">
 
-    <div class="projects-grid">
+                    <div>
 
-        <!-- Calculator Project -->
-        <article class="project-card">
+                        <p class="section-label">
+                            PROJECT
+                        </p>
 
-            <div class="project-content">
+                        <h2>
+                            A project I built.
+                        </h2>
 
-                <span class="project-status">
-                    Completed
-                </span>
+                    </div>
 
-                <h3>Calculator</h3>
 
-                <p>
-                    A simple and responsive calculator built using
-                    HTML, CSS, and JavaScript. It supports basic
-                    arithmetic operations along with keyboard input.
-                </p>
+                    <p class="scroll-hint">
+                        Scroll horizontally →
+                    </p>
 
-                <p class="project-tech">
-                    HTML · CSS · JavaScript
-                </p>
+                </div>
 
-                <div class="project-links">
 
-                    <a href="#" class="btn">
-                        GitHub
-                    </a>
 
-                    <a href="#" class="btn btn-outline">
-                        Live Demo
-                    </a>
+                <!-- Horizontal Project Area -->
+
+                <div class="projects-scroll reveal">
+
+
+                    <!-- Calculator -->
+
+                    <article class="project-card">
+
+                        <div class="project-number">
+                            01
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <p class="project-status">
+                                Completed
+                            </p>
+
+                            <h3>
+                                Calculator
+                            </h3>
+
+                            <p>
+                                A simple and responsive calculator
+                                built using HTML, CSS, and JavaScript.
+                                It supports basic arithmetic operations
+                                along with keyboard input.
+                            </p>
+
+
+                            <div class="project-tech">
+
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+
+                            </div>
+
+
+                            <div class="project-links">
+
+                                <a href="#"
+                                   class="text-link">
+                                    GitHub →
+                                </a>
+
+                                <a href="#"
+                                   class="text-link">
+                                    Live Demo →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
 
                 </div>
 
             </div>
 
-        </article>
+        </section>
 
-    </div>
-
-</section>
 
 
         <!-- ==================== CONTACT ==================== -->
 
-        <section id="contact" class="section section-soft">
+        <section id="contact" class="section section-contact">
 
-            <div class="section-container contact-container">
+            <div class="section-container">
 
-                <p class="section-label">
-                    CONTACT
-                </p>
-
-                <h2>
-                    Let's build something
-                    <span>meaningful.</span>
-                </h2>
-
-                <p class="contact-description">
-                    If you would like to connect, discuss a project,
-                    or talk about technology, feel free to reach out.
-                </p>
+                <div class="contact-layout">
 
 
-                <div class="contact-actions">
+                    <div class="contact-intro reveal">
 
-                    <a
-                        href="mailto:shatabdisds007@gmail.com"
-                        class="primary-button"
-                    >
-                        Email Me →
-                    </a>
+                        <p class="section-label">
+                            CONTACT
+                        </p>
 
-                    <a
-                        href="https://github.com/shatabdidatta"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="secondary-button"
-                    >
-                        GitHub
-                    </a>
+                        <h2>
+                            Let's connect.
+                        </h2>
+
+                        <p>
+                            If you would like to discuss a project,
+                            opportunity, or simply connect, feel free
+                            to reach out.
+                        </p>
+
+                    </div>
+
+
+                    <form class="contact-form reveal">
+
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Your name"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Your email"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="message">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="5"
+                                placeholder="Write your message..."
+                                required></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="button button-primary">
+
+                            Send Message
+
+                        </button>
+
+                    </form>
 
                 </div>
 
@@ -493,16 +583,25 @@
 
     <!-- ==================== FOOTER ==================== -->
 
-    <footer>
+    <footer class="site-footer">
 
         <div class="footer-container">
 
-            <p>
-                © 2026 Shatabdi Datta Sristy
-            </p>
+            <div>
 
-            <p>
-                Designed & built with HTML, CSS & JavaScript.
+                <strong>
+                    Shatabdi Datta Sristy
+                </strong>
+
+                <p>
+                    Computer Science Student
+                </p>
+
+            </div>
+
+
+            <p class="copyright">
+                © 2026 Shatabdi Datta Sristy.
             </p>
 
         </div>
@@ -512,6 +611,7 @@
 
 
     <!-- JavaScript -->
+
     <script src="js/script.js"></script>
 
 </body>
