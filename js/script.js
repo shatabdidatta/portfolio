@@ -1,19 +1,17 @@
+/* =========================================================
+   PORTFOLIO JAVASCRIPT
+   Shatabdi Datta Sristy
+   ========================================================= */
+
+
 /* ==================== THEME TOGGLE ==================== */
 
-const themeToggle =
-    document.getElementById("theme-toggle");
-
-const themeIcon =
-    document.getElementById("theme-icon");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
 
 
-/*
-    Check whether the user previously selected
-    dark mode.
-*/
-
-const savedTheme =
-    localStorage.getItem("theme");
+// Check previously selected theme
+const savedTheme = localStorage.getItem("portfolio-theme");
 
 
 if (savedTheme === "dark") {
@@ -25,7 +23,7 @@ if (savedTheme === "dark") {
 }
 
 
-/* Toggle theme */
+/* Change theme when button is clicked */
 
 themeToggle.addEventListener("click", function () {
 
@@ -41,7 +39,7 @@ themeToggle.addEventListener("click", function () {
         themeIcon.textContent = "☀";
 
         localStorage.setItem(
-            "theme",
+            "portfolio-theme",
             "dark"
         );
 
@@ -50,7 +48,7 @@ themeToggle.addEventListener("click", function () {
         themeIcon.textContent = "☾";
 
         localStorage.setItem(
-            "theme",
+            "portfolio-theme",
             "light"
         );
 
@@ -59,12 +57,86 @@ themeToggle.addEventListener("click", function () {
 });
 
 
+
+/* ==================== MOBILE MENU ==================== */
+
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const navLinks =
+    document.getElementById("navLinks");
+
+
+menuToggle.addEventListener("click", function () {
+
+    navLinks.classList.toggle("active");
+
+});
+
+
+
+/* Close mobile menu after clicking a link */
+
+const navigationLinks =
+    document.querySelectorAll(".nav-link");
+
+
+navigationLinks.forEach(function (link) {
+
+    link.addEventListener("click", function () {
+
+        navLinks.classList.remove("active");
+
+    });
+
+});
+
+
+
+/* ==================== SCROLL ANIMATION ==================== */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+
+const observer =
+    new IntersectionObserver(
+        function (entries) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+
+revealElements.forEach(function (element) {
+
+    observer.observe(element);
+
+});
+
+
+
 /* ==================== ACTIVE NAVIGATION ==================== */
 
 const sections =
     document.querySelectorAll("section");
 
-const navLinks =
+
+const navItems =
     document.querySelectorAll(".nav-link");
 
 
@@ -76,7 +148,7 @@ window.addEventListener("scroll", function () {
     sections.forEach(function (section) {
 
         const sectionTop =
-            section.offsetTop - 150;
+            section.offsetTop - 120;
 
         const sectionHeight =
             section.offsetHeight;
@@ -85,7 +157,7 @@ window.addEventListener("scroll", function () {
         if (
             window.scrollY >= sectionTop &&
             window.scrollY <
-                sectionTop + sectionHeight
+            sectionTop + sectionHeight
         ) {
 
             currentSection =
@@ -96,7 +168,7 @@ window.addEventListener("scroll", function () {
     });
 
 
-    navLinks.forEach(function (link) {
+    navItems.forEach(function (link) {
 
         link.classList.remove("active");
 
