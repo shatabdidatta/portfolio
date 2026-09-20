@@ -1,187 +1,160 @@
-/* =========================================================
+/* ==================================================
+   SHATABDI DATTA SRISTY
    PORTFOLIO JAVASCRIPT
-   Shatabdi Datta Sristy
-   ========================================================= */
+   ================================================== */
 
 
-/* ==================== THEME TOGGLE ==================== */
+/* ==================================================
+   THEME TOGGLE
+   ================================================== */
 
-const themeToggle = document.getElementById("themeToggle");
-const themeIcon = document.getElementById("themeIcon");
+const themeToggle = document.getElementById("theme-toggle");
 
 
-// Check previously selected theme
+// Check previously saved theme
 const savedTheme = localStorage.getItem("portfolio-theme");
 
 
 if (savedTheme === "dark") {
 
-    document.body.classList.add("dark");
-
-    themeIcon.textContent = "☀";
+    document.body.classList.add("dark-mode");
 
 }
 
 
-/* Change theme when button is clicked */
+function updateThemeLabel() {
 
-themeToggle.addEventListener("click", function () {
+    if (document.body.classList.contains("dark-mode")) {
 
-    document.body.classList.toggle("dark");
+        themeToggle.setAttribute(
+            "aria-label",
+            "Switch to light mode"
+        );
 
-
-    const isDark =
-        document.body.classList.contains("dark");
-
-
-    if (isDark) {
-
-        themeIcon.textContent = "☀";
-
-        localStorage.setItem(
-            "portfolio-theme",
-            "dark"
+        themeToggle.setAttribute(
+            "title",
+            "Switch to light mode"
         );
 
     } else {
 
-        themeIcon.textContent = "☾";
+        themeToggle.setAttribute(
+            "aria-label",
+            "Switch to dark mode"
+        );
 
-        localStorage.setItem(
-            "portfolio-theme",
-            "light"
+        themeToggle.setAttribute(
+            "title",
+            "Switch to dark mode"
         );
 
     }
 
+}
+
+
+updateThemeLabel();
+
+
+themeToggle.addEventListener("click", function () {
+
+    document.body.classList.toggle("dark-mode");
+
+
+    const isDark =
+        document.body.classList.contains("dark-mode");
+
+
+    localStorage.setItem(
+        "portfolio-theme",
+        isDark ? "dark" : "light"
+    );
+
+
+    updateThemeLabel();
+
 });
 
 
+/* ==================================================
+   MOBILE NAVIGATION
+   ================================================== */
 
-/* ==================== MOBILE MENU ==================== */
+const mobileMenuToggle =
+    document.getElementById("mobile-menu-toggle");
 
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const navLinks =
-    document.getElementById("navLinks");
+const mobileNav =
+    document.getElementById("mobile-nav");
 
 
-menuToggle.addEventListener("click", function () {
+mobileMenuToggle.addEventListener("click", function () {
 
-    navLinks.classList.toggle("active");
+    const isOpen =
+        mobileNav.classList.toggle("active");
+
+
+    mobileMenuToggle.setAttribute(
+        "aria-expanded",
+        isOpen
+    );
 
 });
-
 
 
 /* Close mobile menu after clicking a link */
 
-const navigationLinks =
-    document.querySelectorAll(".nav-link");
+const mobileNavLinks =
+    mobileNav.querySelectorAll("a");
 
 
-navigationLinks.forEach(function (link) {
+mobileNavLinks.forEach(function (link) {
 
     link.addEventListener("click", function () {
 
-        navLinks.classList.remove("active");
+        mobileNav.classList.remove("active");
+
+        mobileMenuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
     });
 
 });
 
 
+/* ==================================================
+   CONTACT FORM
+   ================================================== */
 
-/* ==================== SCROLL ANIMATION ==================== */
+const contactForm =
+    document.getElementById("contact-form");
 
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-const observer =
-    new IntersectionObserver(
-        function (entries) {
-
-            entries.forEach(function (entry) {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("visible");
-
-                    observer.unobserve(entry.target);
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.12
-        }
-    );
+const formMessage =
+    document.getElementById("form-message");
 
 
-revealElements.forEach(function (element) {
+contactForm.addEventListener("submit", function (event) {
 
-    observer.observe(element);
+    event.preventDefault();
+
+
+    formMessage.textContent =
+        "Thanks for reaching out! This form is currently a demo.";
+
+
+    contactForm.reset();
 
 });
 
 
+/* ==================================================
+   CURRENT YEAR
+   ================================================== */
 
-/* ==================== ACTIVE NAVIGATION ==================== */
-
-const sections =
-    document.querySelectorAll("section");
-
-
-const navItems =
-    document.querySelectorAll(".nav-link");
+const currentYear =
+    document.getElementById("current-year");
 
 
-window.addEventListener("scroll", function () {
-
-    let currentSection = "";
-
-
-    sections.forEach(function (section) {
-
-        const sectionTop =
-            section.offsetTop - 120;
-
-        const sectionHeight =
-            section.offsetHeight;
-
-
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY <
-            sectionTop + sectionHeight
-        ) {
-
-            currentSection =
-                section.getAttribute("id");
-
-        }
-
-    });
-
-
-    navItems.forEach(function (link) {
-
-        link.classList.remove("active");
-
-
-        if (
-            link.getAttribute("href") ===
-            "#" + currentSection
-        ) {
-
-            link.classList.add("active");
-
-        }
-
-    });
-
-});
+currentYear.textContent =
+    new Date().getFullYear();
